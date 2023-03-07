@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    reloader.stakater.com/auto: "true"
+  labels:
+    app_name: gig-ner-wrapper
+  name: gig-ner-wrapper
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app_name: gig-ner-wrapper
+  strategy: {}
+  template:
+    metadata:
+      labels:
+        app_name: gig-ner-wrapper
+    spec:
+      containers:
+        - image: nerwrapper.azurecr.io/ner-wrapper
+          imagePullPolicy: Always
+          name: ner
+          ports:
+            - containerPort: 8081
+              name: port-8081
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 1200m
+              memory: 1024Mi
+            requests:
+              cpu: 1200m
+              memory: 1024Mi
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 60
