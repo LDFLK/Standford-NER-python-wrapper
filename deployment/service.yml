@@ -5,7 +5,6 @@ metadata:
   labels:
     app_name: gig-ner-wrapper
   name: gig-ner-wrapper
-  namespace: prod
 spec:
   ports:
     - name: port-8081
